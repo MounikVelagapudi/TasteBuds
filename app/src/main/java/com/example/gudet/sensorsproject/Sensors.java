@@ -1,18 +1,15 @@
 package com.example.gudet.sensorsproject;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,54 +20,61 @@ import java.util.ArrayList;
 
 public class Sensors extends FragmentActivity {
     TextView tv;
+
     View_Pager2 view_Pager2;
-    static lightDataFragment llightDataFragment;
-    static pressureDataFragment ppressureDataFragment;
-    static tempDataFragment ttempDataFragment;
-    ArrayList<String> sValues;
+    View_Pager4 view_pager3;
+    public static lightDataFragment llightDataFragment;
+    public static pressureDataFragment ppressureDataFragment;
+    public static tempDataFragment ttempDataFragment;
+    //ArrayList<String> sValues;
+    public static lightFragment llightFragment;
+    public static pressureFragment ppressureFragment;
+    public static tempFragment ttempFragment;
+    CommonMethods commonMethods = new CommonMethods();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sensor);
 
-
-      //  sValues = getIntent().getExtras("dataa");
-
-        Intent in = getIntent();
-        Bundle args = in.getBundleExtra("dataa");
-        ArrayList<MyData> res = (ArrayList<MyData>) args.getSerializable("list");
-        Log.d("val", "" +res);
-      //  Bundle bundl = new Bundle();
-      //  bundl.putStringArrayList("valuee", sValues);
-        //bundl.getStringArrayList("data");
-
-
-
         view_Pager2 = new View_Pager2();
+        view_pager3 = new View_Pager4();
 
-       /* llightDataFragment = new lightDataFragment();
-        llightDataFragment.setArguments(res);
+        ArrayList<MyData> filelist = (ArrayList<MyData>) getIntent().getSerializableExtra("dataa");
+        Log.d("val", "" + filelist.size());
 
+        ArrayList<Float> indivResLight = commonMethods.getIndividualResultsLight(filelist);
+        Bundle bundlLight = new Bundle();
+        bundlLight.putSerializable("valueLight", indivResLight);
+        Log.d("light", "" +indivResLight);
+        llightDataFragment = new lightDataFragment();
+        llightDataFragment.setArguments(bundlLight);
+
+        llightFragment = new lightFragment();
+        llightFragment.setArguments(bundlLight);
+
+        ArrayList<Float> indivResPressure = commonMethods.getIndividualResultsPressure(filelist);
+        Bundle bundlPressure = new Bundle();
+        bundlPressure.putSerializable("valuePressure", indivResPressure);
         ppressureDataFragment = new pressureDataFragment();
-        ppressureDataFragment.setArguments(res);
+        Log.d("pressure", "" +indivResPressure);
+        ppressureDataFragment.setArguments(bundlPressure);
 
+        ppressureFragment = new pressureFragment();
+        ppressureFragment.setArguments(bundlPressure);
+
+        ArrayList<Float> indivResTemperature = commonMethods.getIndividualResultsTemperature(filelist);
+        Bundle bundlTemp = new Bundle();
+        bundlTemp.putSerializable("valueTemperature", indivResTemperature);
         ttempDataFragment = new tempDataFragment();
-        ttempDataFragment.setArguments(res);*/
-/*
-        Bundle bundl = new Bundle();
-        bundl.getStringArrayList("data");
+        ttempDataFragment.setArguments(bundlTemp);
 
-        sensorDataFragmentPagerAdapter sensorDisplay = new sensorDataFragmentPagerAdapter(this, getSupportFragmentManager());
-      sensorDisplay.setArguments(bundl);*/
+        ttempFragment = new tempFragment();
+        ttempFragment.setArguments(bundlTemp);
     }
 
     public void sensorActivity(View view) {
-
-
        getSupportFragmentManager().beginTransaction().replace(R.id.container1, view_Pager2).commit();
-
-
     }
 
     @Override
@@ -79,95 +83,157 @@ public class Sensors extends FragmentActivity {
     }
 
     public void graphView(View view) {
-
-        getSupportFragmentManager().beginTransaction().replace(R.id.container1, view_Pager2).commit();
-
+        getSupportFragmentManager().beginTransaction().replace(R.id.container1, view_pager3).commit();
     }
-
-
 
     public static class View_Pager2 extends Fragment {
 
+            @Override
+            public void onCreate(Bundle savedInstanceState) {
+                super.onCreate(savedInstanceState);
+            }
 
-        @Override
-        public void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-        }
+            @Override
+            public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+                return inflater.inflate(R.layout.view_pager1, container, false);
+            }
 
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-            return inflater.inflate(R.layout.view_pager1, container, false);
+            @Override
+            public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+                super.onViewCreated(view, savedInstanceState);
 
-        }
+                // Find the view pager that will allow the user to swipe between fragments
+                ViewPager viewPager = (ViewPager) view.findViewById(R.id.viewPager1);
 
-        @Override
-        public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-            super.onViewCreated(view, savedInstanceState);
+                // Create an adapter that knows which fragment should be shown on each page
+                sensorDataFragmentPagerAdapter1 adapter = new sensorDataFragmentPagerAdapter1(getActivity(), getFragmentManager());
 
-            // Find the view pager that will allow the user to swipe between fragments
-            ViewPager viewPager = (ViewPager) view.findViewById(R.id.viewPager1);
+                // Set the adapter onto the view pager
+                viewPager.setAdapter(adapter);
 
-            // Create an adapter that knows which fragment should be shown on each page
-            sensorDataFragmentPagerAdapter1 adapter = new sensorDataFragmentPagerAdapter1(getActivity(), getFragmentManager());
+                // Give the TabLayout the ViewPager
 
-            // Set the adapter onto the view pager
-            viewPager.setAdapter(adapter);
-
-            // Give the TabLayout the ViewPager
-
-            TabLayout tabLayout = (TabLayout) view.findViewById(R.id.sliding_tabs1);
-            tabLayout.setupWithViewPager(viewPager);
-        }
+                TabLayout tabLayout = (TabLayout) view.findViewById(R.id.sliding_tabs1);
+                tabLayout.setupWithViewPager(viewPager);
+            }
     }
     public static class sensorDataFragmentPagerAdapter1 extends FragmentPagerAdapter {
-        private Context mContext;
-        String type;
-
-
-
-        public sensorDataFragmentPagerAdapter1(Context context, FragmentManager fm) {
-            super(fm);
-            mContext = context;
-
-        }
-
-        // This determines the fragment for each tab
-        @Override
-        public Fragment getItem(int position) {
-            if (position == 0) {
-                return  llightDataFragment;
-            } else if (position == 1){
-                return ppressureDataFragment;
-            } else if (position == 2){
-                return  ttempDataFragment;
-            } else {
-                return llightDataFragment;
+            private Context mContext;
+            String type;
+            public sensorDataFragmentPagerAdapter1(Context context, FragmentManager fm) {
+                super(fm);
+                mContext = context;
             }
-        }
-
-        // This determines the number of tabs
-        @Override
-        public int getCount() {
-            return 3;
-        }
-
-        // This determines the title for each tab
-        @Override
-        public CharSequence getPageTitle(int position) {
-            // Generate title based on item position
-            switch (position) {
-                case 0:
-                    return mContext.getString(R.string.light);
-                case 1:
-                    return mContext.getString(R.string.pressure);
-                case 2:
-                    return mContext.getString(R.string.temperature);
-
-                default:
-                    return null;
+            // This determines the fragment for each tab
+            @Override
+            public Fragment getItem(int position) {
+                if (position == 0) {
+                    return llightDataFragment;
+                } else if (position == 1) {
+                    return ppressureDataFragment;
+                } else if (position == 2) {
+                    return ttempDataFragment;
+                } else {
+                    return llightDataFragment;
+                }
             }
-        }
 
+            // This determines the number of tabs
+            @Override
+            public int getCount() {
+                return 3;
+            }
 
+            // This determines the title for each tab
+            @Override
+            public CharSequence getPageTitle(int position) {
+                // Generate title based on item position
+                switch (position) {
+                    case 0:
+                        return mContext.getString(R.string.light);
+                    case 1:
+                        return mContext.getString(R.string.pressure);
+                    case 2:
+                        return mContext.getString(R.string.temperature);
+
+                    default:
+                        return null;
+                }
+            }
+    }
+    public static class View_Pager4 extends Fragment {
+
+                @Override
+                public void onCreate(Bundle savedInstanceState) {
+                    super.onCreate(savedInstanceState);
+                }
+
+                @Override
+                public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+                    return inflater.inflate(R.layout.view_pager, container, false);
+
+                }
+
+                @Override
+                public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+                    super.onViewCreated(view, savedInstanceState);
+
+                    // Find the view pager that will allow the user to swipe between fragments
+                    ViewPager viewPager = (ViewPager) view.findViewById(R.id.viewPager);
+
+                    // Create an adapter that knows which fragment should be shown on each page
+                    sensorFragmentPagerAdapter1 adapter = new sensorFragmentPagerAdapter1(getActivity(), getFragmentManager());
+
+                    // Set the adapter onto the view pager
+                    viewPager.setAdapter(adapter);
+
+                    // Give the TabLayout the ViewPager
+
+                    TabLayout tabLayout = (TabLayout) view.findViewById(R.id.sliding_tabs);
+                    tabLayout.setupWithViewPager(viewPager);
+                }
+            }
+            public static class sensorFragmentPagerAdapter1 extends FragmentPagerAdapter {
+                private Context mContext;
+                String type;
+                public sensorFragmentPagerAdapter1(Context context, FragmentManager fm) {
+                    super(fm);
+                    mContext = context;
+                }
+                // This determines the fragment for each tab
+                @Override
+                public Fragment getItem(int position) {
+                    if (position == 0) {
+                        return  llightFragment;
+                    } else if (position == 1){
+                        return ppressureFragment;
+                    } else if (position == 2){
+                        return  ttempFragment;
+                    } else {
+                        return llightFragment;
+                    }
+            }
+            // This determines the number of tabs
+            @Override
+            public int getCount() {
+                return 3;
+            }
+
+            // This determines the title for each tab
+            @Override
+            public CharSequence getPageTitle(int position) {
+                // Generate title based on item position
+                switch (position) {
+                    case 0:
+                        return mContext.getString(R.string.light);
+                    case 1:
+                        return mContext.getString(R.string.pressure);
+                    case 2:
+                        return mContext.getString(R.string.temperature);
+
+                    default:
+                        return null;
+                }
+            }
     }
 }

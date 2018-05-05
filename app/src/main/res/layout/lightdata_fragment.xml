@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:textAlignment="center"
     android:id="@+id/light">
     <LinearLayout
         android:layout_width="wrap_content"
@@ -9,12 +10,13 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Ambient light level Value"/>
+            android:textColor="#32a9b0"
+            android:text="@string/light_hint"/>
         <EditText
             android:id="@+id/LIntensity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint= "Get Intensity Value"/>
+            android:hint= "@string/light_value_hint"/>
 
     </LinearLayout>
     <LinearLayout
@@ -23,12 +25,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Min Value"/>
+            android:textColor="#32a9b0"
+            android:text="@string/light_value1"/>
         <EditText
             android:id="@+id/LMinValue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint= "Get Min Value"/>
+            android:textColor="@color/colorPrimary"
+            android:hint= "@string/light_value1"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="wrap_content"
@@ -36,13 +40,15 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Max Value"/>
+            android:textColor="#32a9b0"
+            android:text="@string/max_value"/>
 
     <EditText
         android:id="@+id/LMaxValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint= "Get Max Value"/>
+        android:textColor="@color/colorPrimary"
+        android:hint= "@string/get_max_value"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="wrap_content"
@@ -50,14 +56,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Average Value"/>
+            android:textColor="#32a9b0"
+            android:text="@string/average_value"/>
 
     <EditText
         android:id="@+id/LAvgValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint= "Get Avg Value"/>
+        android:textColor="@color/colorPrimary"
+        android:hint= "@string/get_avg_value"/>
     </LinearLayout>
-
-
 </LinearLayout>

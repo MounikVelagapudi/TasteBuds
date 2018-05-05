@@ -1,9 +1,5 @@
 package com.example.gudet.sensorsproject;
 
-/**
- * Created by mounikvelagapudi on 28/04/18.
- */
-
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -15,7 +11,11 @@ import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
+import java.util.ArrayList;
+
 public class pressureFragment extends Fragment {
+    ArrayList<Float> al;
+    CommonMethods commonMethods = new CommonMethods();
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,7 +31,7 @@ public class pressureFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        al = (ArrayList<Float>)getArguments().getSerializable("valuePressure");
         GraphView graph = (GraphView) view.findViewById(R.id.graph);
         LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[] {
                 new DataPoint(0, 1),

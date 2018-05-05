@@ -9,12 +9,15 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Ambient Temperature"/>
+            android:text="@string/temperature_val"
+            android:textColor="#cc5466"/>
         <EditText
             android:id="@+id/TValue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint= "degree Celsius"/>
+            android:textColor="#bc5011"
+            android:inputType="number"
+            android:hint= "@string/temp_measure"/>
 
     </LinearLayout>
     <LinearLayout
@@ -23,12 +26,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Min Value"/>
+            android:textColor="#cc5466"
+            android:text="@string/min_value"/>
         <EditText
             android:id="@+id/TMinValue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint= "Get Min Value"/>
+            android:textColor="#bc5011"
+            android:hint= "@string/get_min_value"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="wrap_content"
@@ -36,13 +41,15 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Max Value"/>
+            android:textColor="#cc5466"
+            android:text="@string/max_value"/>
 
         <EditText
             android:id="@+id/TMaxValue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint= "Get Max Value"/>
+            android:textColor="#bc5011"
+            android:hint= "@string/get_max_value"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="wrap_content"
@@ -50,14 +57,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Average Value"/>
+            android:textColor="#bc5011"
+            android:text="@string/average_value"/>
 
         <EditText
             android:id="@+id/TAvgValue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint= "Get Avg Value"/>
+            android:textColor="#bc5011"
+            android:hint= "@string/get_avg_value"/>
     </LinearLayout>
-
-
 </LinearLayout>

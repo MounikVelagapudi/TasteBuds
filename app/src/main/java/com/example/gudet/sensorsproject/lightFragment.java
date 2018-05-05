@@ -6,13 +6,11 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
-import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
-import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.EditText;
 
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
@@ -21,20 +19,13 @@ import com.jjoe64.graphview.series.LineGraphSeries;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-import static java.util.Calendar.DAY_OF_MONTH;
-
-/**
- * Created by mounikvelagapudi on 28/04/18.
- */
-
 public class lightFragment extends Fragment {
-    private Sensor sensorTypeL;
-    ListView lv;
-    ArrayList<String> arrayList;
+    EditText lIntensity, lMinValue, lMaxValue, lAvgValue;
+    ArrayList<Float> al;
+    CommonMethods commonMethods = new CommonMethods();
 
-    TextView mDisplayDateTime;
-
-    Calendar mDateAndTime = Calendar.getInstance();
+    // TextView mDisplayDateTime;
+    // Calendar mDateAndTime = Calendar.getInstance();
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,13 +33,12 @@ public class lightFragment extends Fragment {
     }
 
 
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.light_fragment,container, false);
-        mDisplayDateTime = (TextView) view.findViewById(R.id.dateTime);
+        View view = inflater.inflate(R.layout.light_fragment, container, false);
+        // mDisplayDateTime = (TextView) view.findViewById(R.id.dateTime);
         return view;
 
     }
@@ -56,27 +46,19 @@ public class lightFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-  /*      Bundle b = getArguments();
-         arrayList = b.getStringArrayList("val");
-
-
+        al = (ArrayList<Float>) getArguments().getSerializable("valueLight");
         GraphView graph = (GraphView) view.findViewById(R.id.graph);
-
-        DataPoint[] dataPoints = new DataPoint[arrayList.size()]; //Array Declaration of DataPoint objects with size as sensordata list
-        for (int i = 0; i < arrayList.size(); i++) {
-            // adding new DataPoint object to the array for each of list entries
-            dataPoints[i] = new DataPoint(Double.parseDouble(arrayList.get(4)) , Double.parseDouble(arrayList.get(1)));
-        }
-
+        DataPoint[] dataPoints = new DataPoint[al.size()]; // declare an array of DataPoint objects with the same size as your list
         LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(dataPoints);
-
+        for (int i = 0; i < al.size(); i++) {
+            // add new DataPoint object to the array for each of your list entries
+            dataPoints[i] = new DataPoint(al.get(4), al.get(1));
+        }
         graph.addSeries(series);
-
-*/
-
-
     }
+}
+
+
   /* public void onDateClicked(View v) {
 
 
@@ -101,4 +83,4 @@ public class lightFragment extends Fragment {
 */
 
 
-}
+

@@ -1,12 +1,24 @@
 <resources>
-    <string name="app_name">MouniNewProject</string>
+    <string name="app_name">Environment Sensors</string>
     <string name="pressure">Pressure</string>
-
-    <!-- Category name for food [CHAR LIMIT=20] -->
     <string name="light">Light</string>
-
     <string name="temperature">Temperature</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="Insert_value">Insert</string>
+    <string name="delete_value">Delete</string>
+    <string name="retrieve_all">Retrieve All</string>
+    <string name="content_provider">Content provider</string>
+    <string name="statistics_data">Statistics</string>
+    <string name="light_hint">Ambient light level Value</string>
+    <string name="light_value_hint">Get Intensity Value</string>
+    <string name="light_value1">Min Value</string>
+    <string name="max_value">Max Value</string>
+    <string name="get_max_value">Get Max Value</string>
+    <string name="average_value">Average Value</string>
+    <string name="get_avg_value">Get Avg Value</string>
+    <string name="atmospheric_pressure_value">Atmospheric pressure Value</string>
+    <string name="Pressure_val">hPa (millibar)</string>
+    <string name="get_min_value">Get Min Value</string>
+    <string name="temperature_val">Ambient Temperature</string>
+    <string name="temp_measure">degree Celsius</string>
+    <string name="min_value">Min Value</string>
 </resources>

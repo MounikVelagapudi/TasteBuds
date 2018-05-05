@@ -9,4 +9,6 @@
     <color name="colorDecorationLight">#ededed</color>
     <color name="colorDecoration">#b7b7b7</color>
     <color name="colorDecorationDark">#878787</color>
+    <color name="colorBlue">#23f4</color>
+    <color name="colorMustard">#daa520</color>
 </resources>

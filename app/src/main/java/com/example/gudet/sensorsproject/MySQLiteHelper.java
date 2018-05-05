@@ -1,25 +1,18 @@
 package com.example.gudet.sensorsproject;
 
-/**
- * Created by mounikvelagapudi on 28/04/18.
- */
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import org.w3c.dom.Text;
-
-
 public class MySQLiteHelper extends SQLiteOpenHelper {
 
-    public static final String TABLE_DATA = "Student";
+    public static final String TABLE_DATA = "Sensor";
     public static final String COLUMN_ID = "_id";
     public static final String COLUMN_DATA1 = "lightValue";
     public static final String COLUMN_DATA2 = "pressureValue";
     public static final String COLUMN_DATA3 = "tempValue";
     public static final String COLUMN_DATA4 = "Date";
-
 
     private static final String DATABASE_NAME = "SensorsDB";
     private static final int DATABASE_VERSION = 1;

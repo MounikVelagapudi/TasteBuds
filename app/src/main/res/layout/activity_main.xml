@@ -24,60 +24,57 @@
 
             <Button
                 android:id="@+id/button1"
-                android:layout_width="wrap_content"
+                android:layout_width="115dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/colorPrimary"
                 android:onClick="onClickInsertSensor"
-                android:text="Insert" />
+                android:text="@string/Insert_value" />
 
             <Button
                 android:id="@+id/button2"
-                android:layout_width="wrap_content"
+                android:layout_width="115dp"
                 android:layout_height="wrap_content"
                 android:onClick="onClickDeleteSensor"
-                android:text="Delete" />
+                android:layout_weight="1"
+                android:text="@string/delete_value"
+                android:textColor="@color/colorPrimary" />
 
             <Button
                 android:id="@+id/button3"
-                android:layout_width="wrap_content"
+                android:layout_width="115dp"
                 android:layout_height="wrap_content"
                 android:onClick="onClickRetrieveSensor"
-                android:text="Retrieve All" />
+                android:text="@string/retrieve_all"
+                android:layout_weight="1"
+                android:textColor="@color/colorPrimary" />
         </LinearLayout>
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="match_parent"
-            android:layout_height="335dp"
+            android:layout_height="352dp"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="75dp"
+            android:layout_marginTop="58dp"
             android:fadeScrollbars="true"
             android:fadingEdge="vertical"
             android:scrollbarStyle="insideOverlay"
             android:scrollbars="vertical"
-            android:text="Content provider" />
+            android:text="@string/content_provider"
+            android:textColor="@color/colorDecorationDark" />
     </RelativeLayout>
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-
         <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/textView"
-            android:onClick="onDeleteDB"
-            android:text="Delete DB">
-
-        </Button>
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/textView"
-            android:onClick="sensorStatistics"
-            android:text="Statistics" />
+            android:id="@+id/statistics_Button"
+            android:layout_width="@dimen/button_width"
+            android:layout_height="61dp"
+            android:layout_weight="1"
+            android:onClick="onStatisticsActivity"
+            android:textColor="@color/colorPrimary"
+            android:text="@string/statistics_data" />
     </LinearLayout>
-
-
 </LinearLayout>

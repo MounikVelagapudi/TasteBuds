@@ -1,26 +1,16 @@
 package com.example.gudet.sensorsproject;
 
-/**
- * Created by mounikvelagapudi on 28/04/18.
- */
-
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-import android.hardware.SensorEvent;
-import android.os.AsyncTask;
 import android.util.Log;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
-
-import static android.content.ContentValues.TAG;
-
 
 public class MyDataSource {
 
@@ -33,7 +23,6 @@ public class MyDataSource {
 
     SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss", Locale.getDefault());
     Date date = new Date();
-
 
 
     private String[] allColumns = { MySQLiteHelper.COLUMN_ID,
@@ -53,91 +42,73 @@ public class MyDataSource {
         database = dbHelper.getWritableDatabase();
     }
 
-    void InsertSensor(String value1, String value2, String value3){
+    public void InsertSensor(String value1, String value2, String value3){
         ContentValues values = new ContentValues();
         values.put(MySQLiteHelper.COLUMN_DATA1, value1);
         values.put(MySQLiteHelper.COLUMN_DATA2, value2);
         values.put(MySQLiteHelper.COLUMN_DATA3, value3);
         values.put(MySQLiteHelper.COLUMN_DATA4, dateFormat.format(date));
-      //  Log.d("date ", ""+new Date().getDate());
 
         long insertId = database.insert(MySQLiteHelper.TABLE_DATA, null,values);
     }
-    public void deleteSensor(long id1) {
-        long id = id1;
-        database.delete(MySQLiteHelper.TABLE_DATA, MySQLiteHelper.COLUMN_ID
-                + " = " + id, null);
+    public void deleteSensor(Context context) {
+       dbHelper.DeleteDatabase(context);
+
     }
-
-
-    public ArrayList<MyData> retrieveSensor() {
-        ArrayList<MyData> alResult = null;
+    public String retrieveSensor1() {
         Cursor cursor = database.query(MySQLiteHelper.TABLE_DATA,
                 allColumns, null, null,
                 null, null, null);
-      //  Results results = new Results();
-      //  ArrayList<Results> rsult = new ArrayList<Results>();
-        ArrayList<MyData> newData=null;
-        MyData myData = new MyData();
+        MyData newData1;
         String result="";
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
-            newData = cursorToData(cursor);
-             alResult = new ArrayList<MyData>();
-            for (int i=0; i< newData.size(); i++){
-                myData.setLightSensor(newData.get(i).getLightSensor());
-                myData.setPressureSensor(newData.get(i).getPressureSensor());
-                myData.setTempSensor(newData.get(i).getTempSensor());
-                myData.setDate(newData.get(i).getDate());
-                alResult.add(myData);
-            }
-           /* results.setLight(newData.getLightSensor());
-            results.setPressure(newData.getPressureSensor());
-            results.setTemperature(newData.getTempSensor());
-            results.setDate(newData.getDate());
-*/
-          //  rsult.add(results);
-
-      /*  rsult.add(String.valueOf(newData.getId()));
-            rsult.add(String.valueOf(newData.getLightSensor()));
-            rsult.add(String.valueOf(newData.getPressureSensor()));
-            rsult.add(String.valueOf(newData.getTempSensor()));
-            rsult.add(newData.getDate());*/
-            // result+=newData.getId()+" --- "+newData.getLightSensor()+" --- "+newData.getPressureSensor()+" ---  "+newData.getTempSensor()+" --- "+newData.getDate()+"\n";
+            newData1 = cursorToData1(cursor);
+            result = result + (newData1.getId() + " " + newData1.getLightSensor() + " " + newData1.getPressureSensor() + " " + newData1.getTempSensor() + " " + newData1.getDate() + "\n");
             cursor.moveToNext();
         }
         // make sure to close the cursor
         cursor.close();
-        return alResult;
+        return result;
+    }
+    private MyData cursorToData1(Cursor cursor) {
+        MyData mydata = new MyData();
+        mydata.setId(cursor.getLong(0));
+        mydata.setLightSensor(cursor.getFloat(1));
+        mydata.setPressureSensor(cursor.getFloat(2));
+        mydata.setTempSensor(cursor.getFloat(3));
+        mydata.setDate(cursor.getString(4));
+        return mydata;
     }
 
-//    public ArrayList<Integer> retrieveSensor() {
-//        Cursor cursor = null;
-//        try {
-//             cursor = database.query(MySQLiteHelper.TABLE_DATA,
-//                    allColumns, null, null,
-//                    null, null, null);
-//            MyData newData = null;
-//            // String result="";
-//            ArrayList<Integer> resultList = new ArrayList<>();
-//            cursor.moveToFirst();
-//            while (!cursor.isAfterLast()) {
-//                newData = cursorToData(cursor);
-//                // result+=newData.getId()+" "+newData.getLightSensor()+" "+newData.getPressureSensor()+" "+newData.getTempSensor()+" "+newData.getDate()+"\n";
-//                resultList.add((int) newData.getId());
-//                resultList.add((int) newData.getLightSensor());
-//                resultList.add((int) newData.getPressureSensor());
-//                resultList.add((int) newData.getTempSensor());
-//                Log.d("----------------", newData.getId()+" "+newData.getLightSensor()+" "+newData.getPressureSensor()+" "+newData.getTempSensor()+" "+newData.getDate());
-//                cursor.moveToNext();
-//            }
-//
-//            return resultList;
-//
-//        } finally {
-//            cursor.close();
-//        }
-//    }
+
+
+    public ArrayList<MyData> retrieveSensor() {
+        ArrayList<MyData> alResult;
+        Cursor cursor = database.query(MySQLiteHelper.TABLE_DATA,
+                allColumns, null, null,
+                null, null, null);
+
+        ArrayList<MyData> newData=null;
+        alResult = new ArrayList<MyData>();
+        cursor.moveToFirst();
+
+        while (!cursor.isAfterLast()) {
+            MyData mydata = new MyData();
+            mydata.setId(cursor.getLong(0));
+            mydata.setLightSensor(cursor.getFloat(1));
+            mydata.setPressureSensor(cursor.getFloat(2));
+            mydata.setTempSensor(cursor.getFloat(3));
+            mydata.setDate(cursor.getString(4));
+            Log.d("date","" +cursor.getString(4) );
+            alResult.add(mydata);
+
+            }
+        cursor.moveToNext();
+        // make sure to close the cursor
+        cursor.close();
+        return alResult;
+    }
 
     private ArrayList<MyData> cursorToData(Cursor cursor) {
         ArrayList<MyData> mydataAL = new ArrayList<MyData>();

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/Pressure">
     <LinearLayout
@@ -9,12 +10,13 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=" Atmospheric pressure Value"/>
+            android:textColor="#841841"
+            android:text="@string/atmospheric_pressure_value"/>
         <EditText
             android:id="@+id/PValue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint= " hPa (millibar)"/>
+            android:hint= "@string/Pressure_val"/>
 
     </LinearLayout>
     <LinearLayout
@@ -23,12 +25,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Min Value"/>
+            android:textColor="#841841"
+            android:text="@string/min_value"/>
         <EditText
             android:id="@+id/PMinValue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint= "Get Min Value"/>
+            android:textColor="#d8a96c"
+            android:hint= "@string/get_min_value"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="wrap_content"
@@ -36,13 +40,15 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Max Value"/>
+            android:textColor="#841841"
+            android:text="@string/max_value"/>
 
         <EditText
             android:id="@+id/PMaxValue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint= "Get Max Value"/>
+            android:textColor="#d8a96c"
+            android:hint= "@string/get_max_value"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="wrap_content"
@@ -50,13 +56,15 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Average Value"/>
+            android:textColor="#841841"
+            android:text="@string/average_value"/>
 
         <EditText
             android:id="@+id/PAvgValue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint= "Get Avg Value"/>
+            android:textColor="#d8a96c"
+            android:hint= "@string/get_avg_value"/>
     </LinearLayout>
 
 
