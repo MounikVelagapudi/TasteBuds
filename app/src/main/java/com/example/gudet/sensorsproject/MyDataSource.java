@@ -74,9 +74,6 @@ public class MyDataSource {
         mydata.setDate(cursor.getString(4));
         return mydata;
     }
-
-
-
     public ArrayList<MyData> retrieveSensor() {
         ArrayList<MyData> alResult = null;
         Cursor cursor = database.query(MySQLiteHelper.TABLE_DATA,
