@@ -16,7 +16,7 @@
             android:id="@+id/PValue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint= "@string/Pressure_val"/>
+            android:hint= "@string/pressure_val"/>
 
     </LinearLayout>
     <LinearLayout

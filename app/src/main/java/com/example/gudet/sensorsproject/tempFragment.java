@@ -34,12 +34,14 @@ public class tempFragment extends Fragment {
         al = (ArrayList<Float>)getArguments().getSerializable("valueTemperature");
         GraphView graph = (GraphView) view.findViewById(R.id.graph);
         DataPoint[] dataPoints = new DataPoint[al.size()]; // declare an array of DataPoint objects with the same size as your list
-        LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(dataPoints);
+
         for (int i = 0; i < al.size(); i++) {
             // add new DataPoint object to the array for each of your list entries
             dataPoints[i] = new DataPoint(al.get(4), al.get(3));
-            graph.addSeries(series);
+
         }
+        LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(dataPoints);
+        graph.addSeries(series);
 
     }
 

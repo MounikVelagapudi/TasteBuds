@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class MyData implements Serializable {
 
     private long id;
-    private float lightSensor; // cannot we take string n convert to float
+    private float lightSensor;
     private float tempSensor;
     private float pressureSensor;
     private String date;

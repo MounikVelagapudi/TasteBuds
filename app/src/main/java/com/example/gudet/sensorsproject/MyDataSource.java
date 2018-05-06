@@ -21,7 +21,7 @@ public class MyDataSource {
     // AsyncTextRunner runner;
 
 
-    SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss", Locale.getDefault());
+    SimpleDateFormat dateFormat = new SimpleDateFormat("MMM-dd-yy HH:mm:ss", Locale.getDefault());
     Date date = new Date();
 
 
@@ -31,14 +31,9 @@ public class MyDataSource {
     public MyDataSource(Context context)
     {
         //definition of object
-
         dbHelper = new MySQLiteHelper(context);
-        // dbHelper.DeleteDatabase(context);
     }
-
-
     public void open() throws SQLException {
-
         database = dbHelper.getWritableDatabase();
     }
 
@@ -48,23 +43,22 @@ public class MyDataSource {
         values.put(MySQLiteHelper.COLUMN_DATA2, value2);
         values.put(MySQLiteHelper.COLUMN_DATA3, value3);
         values.put(MySQLiteHelper.COLUMN_DATA4, dateFormat.format(date));
-
         long insertId = database.insert(MySQLiteHelper.TABLE_DATA, null,values);
     }
     public void deleteSensor(Context context) {
-       dbHelper.DeleteDatabase(context);
+        dbHelper.DeleteDatabase(context);
 
     }
     public String retrieveSensor1() {
         Cursor cursor = database.query(MySQLiteHelper.TABLE_DATA,
                 allColumns, null, null,
                 null, null, null);
-        MyData newData1;
+        MyData newData1=null;
         String result="";
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             newData1 = cursorToData1(cursor);
-            result = result + (newData1.getId() + " " + newData1.getLightSensor() + " " + newData1.getPressureSensor() + " " + newData1.getTempSensor() + " " + newData1.getDate() + "\n");
+            result+=newData1.getId()+" "+newData1.getLightSensor()+" "+newData1.getPressureSensor()+" "+newData1.getTempSensor()+" "+newData1.getDate()+"\n";
             cursor.moveToNext();
         }
         // make sure to close the cursor
@@ -84,7 +78,7 @@ public class MyDataSource {
 
 
     public ArrayList<MyData> retrieveSensor() {
-        ArrayList<MyData> alResult;
+        ArrayList<MyData> alResult = null;
         Cursor cursor = database.query(MySQLiteHelper.TABLE_DATA,
                 allColumns, null, null,
                 null, null, null);
@@ -100,17 +94,14 @@ public class MyDataSource {
             mydata.setPressureSensor(cursor.getFloat(2));
             mydata.setTempSensor(cursor.getFloat(3));
             mydata.setDate(cursor.getString(4));
-            Log.d("date","" +cursor.getString(4) );
             alResult.add(mydata);
-
-            }
-        cursor.moveToNext();
-        // make sure to close the cursor
+            cursor.moveToNext();
+        }
         cursor.close();
         return alResult;
     }
 
-    private ArrayList<MyData> cursorToData(Cursor cursor) {
+   /* private ArrayList<MyData> cursorToData(Cursor cursor) {
         ArrayList<MyData> mydataAL = new ArrayList<MyData>();
         MyData mydata = new MyData();
 
@@ -122,17 +113,17 @@ public class MyDataSource {
         mydataAL.add(mydata);
 
         return mydataAL;
-    }
+    }*/
 
     public void close() {
         dbHelper.close();
+
     }
 
     public void deleteDataBase(Context context) {
 
         dbHelper.DeleteDatabase(context);
     }
-
 
 
 

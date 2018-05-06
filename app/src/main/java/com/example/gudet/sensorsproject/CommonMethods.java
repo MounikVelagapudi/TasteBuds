@@ -5,34 +5,32 @@ import java.util.Collections;
 
 public class CommonMethods {
 
-    private Float min;
-    private Float max;
-    private Float avg;
+    private Float minValue;
+    private Float maxValue;
+    private Float avgValue;
 
     public Float getMaxValue(ArrayList<Float> al){
-        max = Collections.max(al);
-        return  max;
+        maxValue = Collections.max(al);
+        return  maxValue;
     }
     public Float getMinValue(ArrayList<Float> al){
-        min =  Collections.min(al);
-        return min;
+        minValue =  Collections.min(al);
+        return minValue;
     }
     public Float getAvgValue(ArrayList<Float> al) {
-         avg = 0f;
+         avgValue = 0f;
         if(!al.isEmpty()) {
-            for (Float mark : al) {
-                avg += mark;
+            for (Float allValues : al) {
+                avgValue += allValues;
             }
-            return avg / al.size();
+            return avgValue / al.size();
         }
-        return avg;
+        return avgValue;
     }
     public ArrayList<Float> getIndividualResultsLight(ArrayList<MyData> filelist) {
 
             ArrayList<Float> results = new ArrayList<>();
-             //  MyData myData = new MyData();
-
-            for  (int i=0; i < filelist.size(); i++) {
+                        for  (int i=0; i < filelist.size(); i++) {
                   results.add(filelist.get(i).getLightSensor());
             }
             return results;
@@ -51,6 +49,15 @@ public class CommonMethods {
 
         for  (int i=0; i < filelist.size(); i++) {
             results.add(filelist.get(i).getTempSensor());
+        }
+        return results;
+    }
+    public ArrayList<Float> getIndividualResultsDate(ArrayList<MyData> filelist) {
+
+        ArrayList<Float> results = new ArrayList<>();
+
+        for  (int i=0; i < filelist.size(); i++) {
+            results.add(Float.valueOf(filelist.get(i).getDate()));
         }
         return results;
     }

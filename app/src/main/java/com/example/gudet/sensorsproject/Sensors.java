@@ -23,13 +23,13 @@ public class Sensors extends FragmentActivity {
 
     View_Pager2 view_Pager2;
     View_Pager4 view_pager3;
-    public static lightDataFragment llightDataFragment;
-    public static pressureDataFragment ppressureDataFragment;
-    public static tempDataFragment ttempDataFragment;
+     static lightDataFragment llightDataFragment;
+     static pressureDataFragment ppressureDataFragment;
+     static tempDataFragment ttempDataFragment;
     //ArrayList<String> sValues;
-    public static lightFragment llightFragment;
-    public static pressureFragment ppressureFragment;
-    public static tempFragment ttempFragment;
+     static lightFragment llightFragment;
+     static pressureFragment ppressureFragment;
+     static tempFragment ttempFragment;
     CommonMethods commonMethods = new CommonMethods();
 
     @Override
@@ -71,6 +71,8 @@ public class Sensors extends FragmentActivity {
 
         ttempFragment = new tempFragment();
         ttempFragment.setArguments(bundlTemp);
+
+
     }
 
     public void sensorActivity(View view) {

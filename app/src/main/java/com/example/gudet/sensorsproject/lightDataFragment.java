@@ -21,7 +21,7 @@ public class lightDataFragment extends Fragment {
     private Sensor sensorTypeL;
 
     EditText lIntensity, lMinValue, lMaxValue, lAvgValue;
-    ArrayList<Float> al;
+    ArrayList<Float> arrayList;
     CommonMethods commonMethods = new CommonMethods();
 
     @Override
@@ -39,29 +39,28 @@ public class lightDataFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        al = (ArrayList<Float>)getArguments().getSerializable("valueLight");
-        Log.d("light val" , " "+al);
+        arrayList = (ArrayList<Float>)getArguments().getSerializable("valueLight");
+        Log.d("light val" , " "+arrayList);
 
-        if(al.size() > 0) {
+        if(arrayList.size() > 0) {
 
             EditText lIntensity = view.findViewById(R.id.LIntensity);
             EditText lMinValue = view.findViewById(R.id.LMinValue);
             EditText lMaxValue = view.findViewById(R.id.LMaxValue);
             EditText lAvgValue = view.findViewById(R.id.LAvgValue);
 
-            Float minValue = commonMethods.getMinValue(al);
+            String myfloatvariable = " " + arrayList.get(1);
+            lIntensity.setText(myfloatvariable);
+
+            Float minValue = commonMethods.getMinValue(arrayList);
             lMinValue.setText("" + minValue);
 
-            Float maxValue = commonMethods.getMaxValue(al);
+            Float maxValue = commonMethods.getMaxValue(arrayList);
             lMaxValue.setText("" + maxValue);
 
-            Float avg = commonMethods.getAvgValue(al);
+            Float avg = commonMethods.getAvgValue(arrayList);
             lAvgValue.setText("" + avg);
 
-            String myfloatvariable = " " + al.get(1);
-            lIntensity.setText(myfloatvariable);
         }
     }
-
-
 }

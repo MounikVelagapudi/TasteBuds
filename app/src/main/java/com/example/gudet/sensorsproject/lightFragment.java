@@ -1,7 +1,5 @@
 package com.example.gudet.sensorsproject;
 
-import android.app.DatePickerDialog;
-import android.hardware.Sensor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -31,8 +29,6 @@ public class lightFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
-
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -40,20 +36,22 @@ public class lightFragment extends Fragment {
         View view = inflater.inflate(R.layout.light_fragment, container, false);
         // mDisplayDateTime = (TextView) view.findViewById(R.id.dateTime);
         return view;
-
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         al = (ArrayList<Float>) getArguments().getSerializable("valueLight");
+
         GraphView graph = (GraphView) view.findViewById(R.id.graph);
-        DataPoint[] dataPoints = new DataPoint[al.size()]; // declare an array of DataPoint objects with the same size as your list
-        LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(dataPoints);
+        DataPoint[] dataPoints = new DataPoint[al.size()];
+        // declare an array of DataPoint objects with the same size as your list
+
         for (int i = 0; i < al.size(); i++) {
             // add new DataPoint object to the array for each of your list entries
             dataPoints[i] = new DataPoint(al.get(4), al.get(1));
         }
+        LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(dataPoints);
         graph.addSeries(series);
     }
 }

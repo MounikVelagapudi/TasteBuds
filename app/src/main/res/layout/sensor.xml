@@ -4,11 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     tools:context="com.example.gudet.sensorsproject.Sensors">
-
-
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -20,24 +17,22 @@
                 android:layout_height="match_parent"
                 android:onClick="sensorActivity"
                 android:textColor="#ce819e"
-                android:text="Sensor Activity"/>
-
+                android:text="@string/statistics_display"/>
             <Button
                 android:id="@+id/graphView"
                 android:layout_width="220dp"
                 android:layout_height="match_parent"
-                android:text="Graph View"
+                android:text="@string/graph_view"
+                android:textColor="#ce819e"
                 android:onClick="graphView"/>
 
         </LinearLayout>
 
-
         <FrameLayout
             android:id="@+id/container1"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#ce819e"/>
+            android:layout_height="match_parent"/>
 
-    </LinearLayout>
+</LinearLayout>
 
 

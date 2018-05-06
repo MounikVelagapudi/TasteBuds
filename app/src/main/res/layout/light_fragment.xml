@@ -4,23 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-
-    <Button
-        android:id="@+id/dateBtn"
-        android:layout_width="139dp"
-        android:layout_height="wrap_content"
-        android:onClick="onDateClicked"
-        android:text="Select Date" />
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:id="@+id/dateTime"
-        android:layout_alignParentEnd="true"
-        tools:ignore="RtlHardcoded" />
-
-
+        android:layout_alignParentEnd="true"/>
     <com.jjoe64.graphview.GraphView
         android:id="@+id/graph"
         android:layout_width="match_parent"
